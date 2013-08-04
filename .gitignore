@@ -1,0 +1,28 @@
+# Ignore bundler config.
+/.bundle
+
+# Ignore the default SQLite database.
+/db/*.sqlite3
+/db/*.sqlite3-journal
+
+# Ignore all logfiles and tempfiles.
+/log/*.log
+/tmp
+
+# Ignore our vendored gems
+vendor/ruby
+
+# Other stuff from GitHub Rails .gitignore file
+*.rbc
+*.sassc
+.sass-cache
+capybara-*.html
+.rspec
+.rvmrc
+/vendor/bundle
+/public/system/*
+/coverage/
+/spec/tmp/*
+rerun.txt
+pickle-email-*.html
+.project
