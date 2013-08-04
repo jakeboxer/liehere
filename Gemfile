@@ -28,6 +28,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 
 group :development, :test do
+  gem "capybara", "~> 2.1.0"
   gem "rspec-rails", "~> 2.14.0"
 end
 
