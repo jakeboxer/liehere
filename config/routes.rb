@@ -1,7 +1,9 @@
 Liehere::Application.routes.draw do
-  resources :users
+  resources :users do
+    resources :statements, :only => [:create, :new]
+  end
 
-  resources :statements
+  resources :statements, :only => [:create, :new]
 
   root 'statements#new'
 
