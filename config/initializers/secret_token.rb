@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-Liehere::Application.config.secret_key_base = '92a00ec465b8650e6f29c9cf69e0af0828af1471dbb348d693256d43ceefa47e4557da5fa49048227ff5966d1c6f7d7f07487fa183bdce29a5c7384a547a34bd'
+Liehere::Application.config.secret_key_base = ENV['LIEHERE_SESSION_SECRET_KEY_BASE']
