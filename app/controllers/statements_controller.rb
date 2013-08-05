@@ -1,8 +1,8 @@
 class StatementsController < ApplicationController
+  before_filter :load_unfinished_user
+
   def create
-    if session[:unfinished_user_id].present?
-      @unfinished_user = User.find(session[:unfinished_user_id])
-    else
+    unless @unfinished_user
       @unfinished_user = User.create!
       session[:unfinished_user_id] = @unfinished_user.id
     end
@@ -21,11 +21,18 @@ class StatementsController < ApplicationController
 
   def new
     @statement = Statement.new
+    @statement.user = @unfinished_user
   end
 
   private
 
   def statement_params
     params.require(:statement).permit(:text)
+  end
+
+  def load_unfinished_user
+    if session[:unfinished_user_id].present?
+      @unfinished_user = User.find(session[:unfinished_user_id])
+    end
   end
 end
