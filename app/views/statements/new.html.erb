@@ -20,8 +20,24 @@
     </div>
   <% end %>
 
-  <%= f.hidden_field(:truth) %>
-  <%= f.text_field(:text, :placeholder => @statement.truth? ? "i once gave CPR to a state senator" : "i owe over $500 at a casino in the caribbean") %>
+  <div>
+    <%= f.text_field(:text, :placeholder => @statement.truth? ? "i once gave CPR to a state senator" : "i owe over $500 at a casino in the caribbean") %>
+  </div>
+
+  <% if @new_statement_type == :either %>
+    <ul>
+      <li>
+        <%= f.radio_button(:truth, 'true') %>
+        <%= f.label(:truth, 'true story', :value => 'true') %>
+      </li>
+      <li>
+        <%= f.radio_button(:truth, 'false') %>
+        <%= f.label(:truth, 'lie', :value => 'false') %>
+      </li>
+    </ul>
+  <% else %>
+    <%= f.hidden_field(:truth) %>
+  <% end %>
 
   <%= f.submit %>
 <% end %>
