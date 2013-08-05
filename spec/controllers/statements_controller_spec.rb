@@ -9,6 +9,26 @@ describe StatementsController do
   end
 
   describe 'POST #create' do
+    context "when there's no text" do
+      it "creates a new user" do
+        expect do
+          post :create, :statement => {:text => ''}
+        end.to change { User.count }.by(1)
+      end
+
+
+      it "doesn't create a new statement" do
+        expect do
+          post :create, :statement => {:text => ''}
+        end.not_to change { Statement.count }
+      end
+
+      it "sets the flash error message" do
+        post :create, :statement => {:text => ''}
+        expect(flash[:error]).to be_present
+      end
+    end
+
     context "when there's no user" do
       it "redirects to the new statement form" do
         post :create, :statement => {:text => 'irrelevant'}
