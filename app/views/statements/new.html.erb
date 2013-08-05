@@ -14,3 +14,16 @@
   <%= f.text_field(:text, :placeholder => "i once gave CPR to a state senator") %>
   <%= f.submit %>
 <% end %>
+
+<% if @unfinished_user.present? %>
+  <h2>so far:</h2>
+
+  <ul class="statements">
+    <% @unfinished_user.statements.each do |statement| %>
+      <li>
+        <em>(<%= statement.lie ? "lie" : "truth" %>)</em>
+        <%= statement.text %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
