@@ -1,6 +1,29 @@
 <h1>tell me something <em>interesting</em> and <strong>true</strong> about yourself</h1>
 
-<%= form_for(@statement) do |f| %>
+<%= form_for(new_statement_form_record) do |f| %>
+  <% if @statement.errors.any? %>
+    <div class="form-errors">
+      <ul>
+        <% @statement.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
   <%= f.text_field(:text, :placeholder => "i once gave CPR to a state senator") %>
   <%= f.submit %>
+<% end %>
+
+<% if @unfinished_user.present? %>
+  <h2>so far:</h2>
+
+  <ul class="statements">
+    <% @unfinished_user.statements.each do |statement| %>
+      <li>
+        <em>(<%= statement.lie ? "lie" : "truth" %>)</em>
+        <%= statement.text %>
+      </li>
+    <% end %>
+  </ul>
 <% end %>
