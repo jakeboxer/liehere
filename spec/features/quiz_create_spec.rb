@@ -14,7 +14,17 @@ feature "Creating a quiz" do
     # Second page should include a list of existing statements, which should
     # include the first statement.
     within('.statements') do
-      expect(page).to have_content('first statement')
+      expect(page).to have_content('(truth) first statement')
+    end
+
+    fill_in 'statement[text]', :with => 'second statement'
+    click_button 'Create Statement'
+
+    # List of statements should now include both, and the second should be a
+    # lie.
+    within('.statements') do
+      expect(page).to have_content('(truth) first statement')
+      expect(page).to have_content('(lie) second statement')
     end
   end
 end

@@ -1,4 +1,13 @@
-<h1>tell me something <em>interesting</em> and <strong>true</strong> about yourself</h1>
+<h1>
+  <% case @new_statement_type %>
+  <% when :truth %>
+    tell me something <em>interesting</em> and <strong>true</strong> about yourself
+  <% when :lie %>
+    now tell me a <em>lie</em>
+  <% when :either %>
+    now tell me either <strong>the truth</strong> or <em>a lie</em>
+  <% end %>
+</h1>
 
 <%= form_for(new_statement_form_record) do |f| %>
   <% if @statement.errors.any? %>
@@ -11,7 +20,9 @@
     </div>
   <% end %>
 
-  <%= f.text_field(:text, :placeholder => "i once gave CPR to a state senator") %>
+  <%= f.hidden_field(:truth) %>
+  <%= f.text_field(:text, :placeholder => @statement.truth? ? "i once gave CPR to a state senator" : "i owe over $500 at a casino in the caribbean") %>
+
   <%= f.submit %>
 <% end %>
 
@@ -21,7 +32,7 @@
   <ul class="statements">
     <% @unfinished_user.statements.each do |statement| %>
       <li>
-        <em>(<%= statement.lie ? "lie" : "truth" %>)</em>
+        <em>(<%= statement.truth? ? 'truth' : "lie" %>)</em>
         <%= statement.text %>
       </li>
     <% end %>
