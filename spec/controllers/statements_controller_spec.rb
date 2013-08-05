@@ -16,7 +16,6 @@ describe StatementsController do
         end.to change { User.count }.by(1)
       end
 
-
       it "doesn't create a new statement" do
         expect do
           post :create, :statement => {:text => '', :truth => 'true'}
