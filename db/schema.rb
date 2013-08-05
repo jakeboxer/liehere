@@ -14,9 +14,9 @@
 ActiveRecord::Schema.define(version: 20130804234256) do
 
   create_table "statements", force: true do |t|
-    t.string   "text",       default: "",    null: false
+    t.string   "text"
     t.integer  "user_id"
-    t.boolean  "lie",        default: false, null: false
+    t.boolean  "truth"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

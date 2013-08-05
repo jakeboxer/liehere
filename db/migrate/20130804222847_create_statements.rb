@@ -1,9 +1,9 @@
 class CreateStatements < ActiveRecord::Migration
   def change
     create_table :statements do |t|
-      t.string :text, :null => false, :default => ''
+      t.string :text
       t.references :user, :index => true
-      t.boolean :lie, :null => false, :default => false
+      t.boolean :truth
 
       t.timestamps
     end
