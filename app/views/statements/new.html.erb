@@ -1,6 +1,6 @@
 <h1>tell me something <em>interesting</em> and <strong>true</strong> about yourself</h1>
 
-<%= form_for(@statement) do |f| %>
+<%= form_for(new_statement_form_record) do |f| %>
   <%= f.text_field(:text, :placeholder => "i once gave CPR to a state senator") %>
   <%= f.submit %>
 <% end %>

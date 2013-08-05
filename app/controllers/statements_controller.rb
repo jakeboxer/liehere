@@ -4,6 +4,7 @@ class StatementsController < ApplicationController
       @unfinished_user = User.find(session[:unfinished_user_id])
     else
       @unfinished_user = User.create!
+      session[:unfinished_user_id] = @unfinished_user.id
     end
 
     @statement = Statement.new(statement_params)
