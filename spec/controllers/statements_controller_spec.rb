@@ -9,29 +9,36 @@ describe StatementsController do
   end
 
   describe 'POST #create' do
-    context "when there's no text" do
+    context "when there's no :text" do
       it "creates a new user" do
         expect do
-          post :create, :statement => {:text => ''}
+          post :create, :statement => {:text => '', :truth => true}
         end.to change { User.count }.by(1)
       end
 
 
       it "doesn't create a new statement" do
         expect do
-          post :create, :statement => {:text => ''}
+          post :create, :statement => {:text => '', :truth => true}
         end.not_to change { Statement.count }
       end
 
       it "sets the flash error message" do
-        post :create, :statement => {:text => ''}
+        post :create, :statement => {:text => '', :truth => true}
+        expect(flash[:error]).to be_present
+      end
+    end
+
+    context "when there's no :truth" do
+      it "sets the flash error message" do
+        post :create, :statement => {:text => 'irrelevant'}
         expect(flash[:error]).to be_present
       end
     end
 
     context "when there's no user" do
       it "redirects to the new statement form" do
-        post :create, :statement => {:text => 'irrelevant'}
+        post :create, :statement => {:text => 'irrelevant', :truth => true}
 
         new_unfinished_user = User.last
 
@@ -40,13 +47,13 @@ describe StatementsController do
 
       it "creates a new user" do
         expect do
-          post :create, :statement => {:text => 'irrelevant'}
+          post :create, :statement => {:text => 'irrelevant', :truth => true}
         end.to change { User.count }.by(1)
       end
 
       it "creates a new statement" do
         expect do
-          post :create, :statement => {:text => 'irrelevant'}
+          post :create, :statement => {:text => 'irrelevant', :truth => true}
         end.to change { Statement.count }.by(1)
       end
     end
